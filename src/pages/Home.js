@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import Footer from "./includes/Footer";
 import Header from "./includes/Header";
 
+const parser = new DOMParser();
 export default function Home() {
+  const [data, setData] = useState([]);
   const loadData = () => {
     fetch("https://icircles.app/api/printingpress/home/140")
       .then((response) => response.json())
       .then((data) => setData(data));
   };
-  const [data, setData] = useState([]);
+
   useEffect(() => {
     loadData();
   }, []);
@@ -17,31 +19,73 @@ export default function Home() {
     <React.Fragment>
       <Header />
       <section>
-        <div className="banner">
-          <div className="container">
-            <div className="banner_wrapper">
-              <div className="row d-flex align-items-center">
-                <div className="col-md-6 col-lg-6">
-                  <div className="banner_item">
-                    <h2>Corporate identity Design For You</h2>
-                    <p>
-                      We can print your identy card, mugs, notebook, business
-                      cards, brochure, Notebook and many more in resonable
-                      price.
-                    </p>
-                    <div className="banner_btn">
-                      <a href="#">Shop Now</a>
-                      <a href="#">Contact Us</a>
+        <div
+          id="carouselExampleIndicators"
+          className="carousel slide"
+          data-bs-ride="carousel"
+        >
+          <div className="carousel-indicators">
+            {data.sliders &&
+              data.sliders.map((slider, key) => {
+                return (
+                  <button
+                    key={key}
+                    type="button"
+                    data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide-to={key}
+                    className={key == 0 ? "active" : ""}
+                    aria-current="true"
+                    aria-label="Slide 1"
+                  ></button>
+                );
+              })}
+          </div>
+          <div className="carousel-inner">
+            {data.sliders &&
+              data.sliders.map((slider, key) => {
+                return (
+                  <div
+                    className={
+                      key == 0 ? "carousel-item active" : "carousel-item"
+                    }
+                    key={key}
+                  >
+                    <div className="banner">
+                      <div className="container">
+                        <div className="banner_wrapper">
+                          <div className="row d-flex align-items-center">
+                            <div className="col-md-6 col-lg-6">
+                              <div className="banner_item">
+                                <h2>{slider.title}</h2>
+                                <p>
+                                  {
+                                    parser.parseFromString(
+                                      slider.description,
+                                      "text/html"
+                                    ).body.innerText
+                                  }
+                                </p>
+                                <div className="banner_btn">
+                                  <a href="#">Shop Now</a>
+                                  <a href="#">Contact Us</a>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="col-md-6 col-lg-6">
+                              <div className="banner_content">
+                                <img
+                                  src={`https://icircles.app/uploads/slider/${data.ms_id}/${slider.image}`}
+                                  alt=""
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="col-md-6 col-lg-6">
-                  <div className="banner_content">
-                    <img src="images/banner_content.png" alt="" />
-                  </div>
-                </div>
-              </div>
-            </div>
+                );
+              })}
           </div>
         </div>
       </section>
@@ -51,7 +95,7 @@ export default function Home() {
             <div className="row">
               <div className="col-sm-6 col-md-4 col-lg-3 text-center">
                 <div className="feature_wrap">
-                  <img src="images/feature1.png" alt="" />
+                  <img src="assets/images/feature1.png" alt="" />
                   <h3>Next day delivery</h3>
                   <p>
                     Available on selected products. Order before 2pm (EST)
@@ -61,7 +105,7 @@ export default function Home() {
               </div>
               <div className="col-sm-6 col-md-4 col-lg-3 text-center">
                 <div className="feature_wrap">
-                  <img src="images/feature2.png" alt="" />
+                  <img src="assets/images/feature2.png" alt="" />
                   <h3>The iCircle Promise</h3>
                   <p>
                     We move heaven and earth so you’re happy with your order!
@@ -70,7 +114,7 @@ export default function Home() {
               </div>
               <div className="col-sm-6 col-md-4 col-lg-3 text-center">
                 <div className="feature_wrap">
-                  <img src="images/feature3.png" alt="" />
+                  <img src="assets/images/feature3.png" alt="" />
                   <h3>Printfinity</h3>
                   <p>
                     Enjoy a different design on the back of every card – or
@@ -80,7 +124,7 @@ export default function Home() {
               </div>
               <div className="col-sm-6 col-md-4 col-lg-3 text-center">
                 <div className="feature_wrap">
-                  <img src="images/feature4.png" alt="" />
+                  <img src="assets/images/feature4.png" alt="" />
                   <h3>Grow Your Business</h3>
                   <p>Get more for your print with iCircle Business Services</p>
                 </div>
@@ -96,7 +140,7 @@ export default function Home() {
               <div className="col-lg-12">
                 <div className="section_header text-center">
                   <h2>
-                    Most <span>Popular</span>{" "}
+                    MOST <span>POPULAR</span>{" "}
                   </h2>
                   <p>
                     Your business experience should be encompass everything.
@@ -108,126 +152,26 @@ export default function Home() {
             </div>
             <div className="popular_wrapper">
               <div className="row">
-                <div className="col-sm-6 col-md-4 col-lg-3">
-                  <div className="populer_wrap">
-                    <div className="popular_img">
-                      <img src="images/popular1.png" alt="" />
-                    </div>
-                    <div className="wrap_title">
-                      <a href="#">
-                        Business Cards
-                        <span>
-                          <i className="fa-solid fa-right-long"></i>
-                        </span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6 col-md-4 col-lg-3">
-                  <div className="populer_wrap">
-                    <div className="popular_img">
-                      <img src="images/popular2.png" alt="" />
-                    </div>
-                    <div className="wrap_title">
-                      <a href="#">
-                        Banners
-                        <span>
-                          <i className="fa-solid fa-right-long"></i>
-                        </span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6 col-md-4 col-lg-3">
-                  <div className="populer_wrap">
-                    <div className="popular_img">
-                      <img src="images/popular3.png" alt="" />
-                    </div>
-                    <div className="wrap_title">
-                      <a href="#">
-                        Postcards
-                        <span>
-                          <i className="fa-solid fa-right-long"></i>
-                        </span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6 col-md-4 col-lg-3">
-                  <div className="populer_wrap">
-                    <div className="popular_img">
-                      <img src="images/popular4.png" alt="" />
-                    </div>
-                    <div className="wrap_title">
-                      <a href="#">
-                        Wedding Invites
-                        <span>
-                          <i className="fa-solid fa-right-long"></i>
-                        </span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6 col-md-4 col-lg-3">
-                  <div className="populer_wrap">
-                    <div className="popular_img">
-                      <img src="images/popular5.png" alt="" />
-                    </div>
-                    <div className="wrap_title">
-                      <a href="#">
-                        Thank You Cards
-                        <span>
-                          <i className="fa-solid fa-right-long"></i>
-                        </span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6 col-md-4 col-lg-3">
-                  <div className="populer_wrap">
-                    <div className="popular_img">
-                      <img src="images/popular6.png" alt="" />
-                    </div>
-                    <div className="wrap_title">
-                      <a href="#">
-                        Posters
-                        <span>
-                          <i className="fa-solid fa-right-long"></i>
-                        </span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6 col-md-4 col-lg-3">
-                  <div className="populer_wrap">
-                    <div className="popular_img">
-                      <img src="images/popular7.png" alt="" />
-                    </div>
-                    <div className="wrap_title">
-                      <a href="#">
-                        Presentation Folders
-                        <span>
-                          <i className="fa-solid fa-right-long"></i>
-                        </span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6 col-md-4 col-lg-3">
-                  <div className="populer_wrap">
-                    <div className="popular_img">
-                      <img src="images/popular8.png" alt="" />
-                    </div>
-                    <div className="wrap_title">
-                      <a href="#">
-                        Yard signs
-                        <span>
-                          <i className="fa-solid fa-right-long"></i>
-                        </span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
+                {data.product_categories &&
+                  data.product_categories.map((category, key) => {
+                    return (
+                      <div className="col-sm-6 col-md-4 col-lg-3" key={key}>
+                        <div className="populer_wrap">
+                          <div className="popular_img">
+                            <img src="assets/images/popular1.png" alt="" />
+                          </div>
+                          <div className="wrap_title">
+                            <a href="#">
+                              {category.name}
+                              <span>
+                                <i className="fa-solid fa-right-long"></i>
+                              </span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
               </div>
             </div>
           </div>
@@ -240,12 +184,12 @@ export default function Home() {
               <div className=" col-lg-6">
                 <div className="bottole_left">
                   <div className="main_img">
-                    <img src="images/bottole.png" alt="" />
+                    <img src="assets/images/bottole.png" alt="" />
                     <div className="sub_imgOne">
-                      <img src="images/bottole2.png" alt="" />
+                      <img src="assets/images/bottole2.png" alt="" />
                     </div>
                     <div className="sub_imgTwo">
-                      <img src="images/bottole3.png" alt="" />
+                      <img src="assets/images/bottole3.png" alt="" />
                     </div>
                   </div>
                 </div>
@@ -281,7 +225,7 @@ export default function Home() {
               <div className="col-lg-12">
                 <div className="section_header text-center">
                   <h2>
-                    Hire A <span>Designer</span>{" "}
+                    BESTSELLING <span>PRODUCTS</span>{" "}
                   </h2>
                   <p>
                     Your business experience should be encompass everything.
@@ -293,374 +237,85 @@ export default function Home() {
             </div>
             <div className="hire_wrapper">
               <div className="row card_slider">
-                <div className="col-lg-4">
-                  <div className="card_item">
-                    <div className="content_img">
-                      <img src="images/hireone.png" alt="" />
-                      <img src="images/hireone.png" alt="" />
-                      <img src="images/hireone.png" alt="" />
-                      <img src="images/hireone.png" alt="" />
-                    </div>
-                    <div className="content_profile">
-                      <img src="images/h11.png" alt="" />
-                    </div>
-                    <div className="content_text">
-                      <div className="content_head">
-                        <a href="#">
-                          Bayley Robertson{" "}
-                          <span>
-                            <i className="fa-solid fa-circle-check"></i>
-                          </span>
-                        </a>
-                        <a href="#">
-                          <i className="fa-solid fa-heart"></i>
-                        </a>
-                      </div>
-                      <div className="content_middle">
-                        <div className="star">
-                          <ul>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                          </ul>
-                        </div>
-                        <div className="review">
-                          <span>4.5 / 5.00 User Reviews</span>
+                {data.featured_products &&
+                  data.featured_products.map((pd) => {
+                    return (
+                      <div className="col-lg-4">
+                        <div className="card_item">
+                          <div className="content_img">
+                            <img src="assets/images/hireone.png" alt="" />
+                            <img src="assets/images/hireone.png" alt="" />
+                            <img src="assets/images/hireone.png" alt="" />
+                            <img src="assets/images/hireone.png" alt="" />
+                          </div>
+                          
+                          <div className="content_text">
+                            <div className="title">
+                              <span>{pd.name}</span>
+                            </div>
+                            <div className="content_footer">
+                              <div className="content_btn">
+                                Starting From <span>$25</span>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <div className="title">
-                        <span>
-                          I Will Design A Creative and Standard Business Cars
-                        </span>
-                      </div>
-                      <div className="content_footer">
-                        <h3>
-                          Starting From <span>$25</span>
-                        </h3>
-                        <div className="content_btn">
-                          <a href="#">Order Now</a>
+                    );
+                  })}
+                {data.popular_products &&
+                  data.popular_products.map((pd) => {
+                    return (
+                      <div className="col-lg-4">
+                        <div className="card_item">
+                          <div className="content_img">
+                            <img src="assets/images/hireone.png" alt="" />
+                            <img src="assets/images/hireone.png" alt="" />
+                            <img src="assets/images/hireone.png" alt="" />
+                            <img src="assets/images/hireone.png" alt="" />
+                          </div>
+                          
+                          <div className="content_text">
+                            <div className="title">
+                              <span>{pd.name}</span>
+                            </div>
+                            <div className="content_footer">
+                              <div className="content_btn">
+                                Starting From <span>$25</span>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-4">
-                  <div className="card_item">
-                    <div className="content_img">
-                      <img src="images/hire2.png" alt="" />
-                      <img src="images/hire2.png" alt="" />
-                      <img src="images/hire2.png" alt="" />
-                      <img src="images/hire2.png" alt="" />
-                    </div>
-                    <div className="content_profile">
-                      <img src="images/h22.png" alt="" />
-                    </div>
-                    <div className="content_text">
-                      <div className="content_head">
-                        <a href="#">
-                          Jullian H{" "}
-                          <span>
-                            <i className="fa-solid fa-circle-check"></i>
-                          </span>
-                        </a>
-                        <a href="#">
-                          <i className="fa-solid fa-heart"></i>
-                        </a>
-                      </div>
-                      <div className="content_middle">
-                        <div className="star">
-                          <ul>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                          </ul>
-                        </div>
-                        <div className="review">
-                          <span>4.5 / 5.00 User Reviews</span>
+                    );
+                  })}
+                {data.bestselling_products &&
+                  data.bestselling_products.map((pd) => {
+                    return (
+                      <div className="col-lg-4">
+                        <div className="card_item">
+                          <div className="content_img">
+                            <img src="assets/images/hireone.png" alt="" />
+                            <img src="assets/images/hireone.png" alt="" />
+                            <img src="assets/images/hireone.png" alt="" />
+                            <img src="assets/images/hireone.png" alt="" />
+                          </div>
+                          
+                          <div className="content_text">
+                            <div className="title">
+                              <span>{pd.name}</span>
+                            </div>
+                            <div className="content_footer">
+                              <div className="content_btn">
+                                Starting From <span>$25</span>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <div className="title">
-                        <span>Design A Corporate Flyer For Your Buainess</span>
-                      </div>
-                      <div className="content_footer">
-                        <h3>
-                          Starting From <span>$30</span>
-                        </h3>
-                        <div className="content_btn">
-                          <a href="#">Order Now</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-4">
-                  <div className="card_item">
-                    <div className="content_img">
-                      <img src="images/hire3.png" alt="" />
-                      <img src="images/hire3.png" alt="" />
-                      <img src="images/hire3.png" alt="" />
-                      <img src="images/hire3.png" alt="" />
-                    </div>
-                    <div className="content_profile">
-                      <img src="images/h33.png" alt="" />
-                    </div>
-                    <div className="content_text">
-                      <div className="content_head">
-                        <a href="#">
-                          Petterson S{" "}
-                          <span>
-                            <i className="fa-solid fa-circle-check"></i>
-                          </span>
-                        </a>
-                        <a href="#">
-                          <i className="fa-solid fa-heart"></i>
-                        </a>
-                      </div>
-                      <div className="content_middle">
-                        <div className="star">
-                          <ul>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                          </ul>
-                        </div>
-                        <div className="review">
-                          <span>4.5 / 5.00 User Reviews</span>
-                        </div>
-                      </div>
-                      <div className="title">
-                        <span>I Will Design A Post Cards For Your Company</span>
-                      </div>
-                      <div className="content_footer">
-                        <h3>
-                          Starting From <span>$20</span>
-                        </h3>
-                        <div className="content_btn">
-                          <a href="#">Order Now</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-4">
-                  <div className="card_item">
-                    <div className="content_img">
-                      <img src="images/hire2.png" alt="" />
-                      <img src="images/hire2.png" alt="" />
-                      <img src="images/hire2.png" alt="" />
-                      <img src="images/hire2.png" alt="" />
-                    </div>
-                    <div className="content_profile">
-                      <img src="images/h22.png" alt="" />
-                    </div>
-                    <div className="content_text">
-                      <div className="content_head">
-                        <a href="#">
-                          Jullian H{" "}
-                          <span>
-                            <i className="fa-solid fa-circle-check"></i>
-                          </span>
-                        </a>
-                        <a href="#">
-                          <i className="fa-solid fa-heart"></i>
-                        </a>
-                      </div>
-                      <div className="content_middle">
-                        <div className="star">
-                          <ul>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                          </ul>
-                        </div>
-                        <div className="review">
-                          <span>4.5 / 5.00 User Reviews</span>
-                        </div>
-                      </div>
-                      <div className="title">
-                        <span>Design A Corporate Flyer For Your Buainess</span>
-                      </div>
-                      <div className="content_footer">
-                        <h3>
-                          Starting From <span>$30</span>
-                        </h3>
-                        <div className="content_btn">
-                          <a href="#">Order Now</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-4">
-                  <div className="card_item">
-                    <div className="content_img">
-                      <img src="images/hire2.png" alt="" />
-                      <img src="images/hire2.png" alt="" />
-                      <img src="images/hire2.png" alt="" />
-                      <img src="images/hire2.png" alt="" />
-                    </div>
-                    <div className="content_profile">
-                      <img src="images/h22.png" alt="" />
-                    </div>
-                    <div className="content_text">
-                      <div className="content_head">
-                        <a href="#">
-                          Jullian H{" "}
-                          <span>
-                            <i className="fa-solid fa-circle-check"></i>
-                          </span>
-                        </a>
-                        <a href="#">
-                          <i className="fa-solid fa-heart"></i>
-                        </a>
-                      </div>
-                      <div className="content_middle">
-                        <div className="star">
-                          <ul>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                          </ul>
-                        </div>
-                        <div className="review">
-                          <span>4.5 / 5.00 User Reviews</span>
-                        </div>
-                      </div>
-                      <div className="title">
-                        <span>Design A Corporate Flyer For Your Buainess</span>
-                      </div>
-                      <div className="content_footer">
-                        <h3>
-                          Starting From <span>$30</span>
-                        </h3>
-                        <div className="content_btn">
-                          <a href="#">Order Now</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-4">
-                  <div className="card_item">
-                    <div className="content_img">
-                      <img src="images/hire3.png" alt="" />
-                      <img src="images/hire3.png" alt="" />
-                      <img src="images/hire3.png" alt="" />
-                      <img src="images/hire3.png" alt="" />
-                    </div>
-                    <div className="content_profile">
-                      <img src="images/h33.png" alt="" />
-                    </div>
-                    <div className="content_text">
-                      <div className="content_head">
-                        <a href="#">
-                          Petterson S{" "}
-                          <span>
-                            <i className="fa-solid fa-circle-check"></i>
-                          </span>
-                        </a>
-                        <a href="#">
-                          <i className="fa-solid fa-heart"></i>
-                        </a>
-                      </div>
-                      <div className="content_middle">
-                        <div className="star">
-                          <ul>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                            <li>
-                              <i className="fa-solid fa-star"></i>
-                            </li>
-                          </ul>
-                        </div>
-                        <div className="review">
-                          <span>4.5 / 5.00 User Reviews</span>
-                        </div>
-                      </div>
-                      <div className="title">
-                        <span>I Will Design A Post Cards For Your Company</span>
-                      </div>
-                      <div className="content_footer">
-                        <h3>
-                          Starting From <span>$20</span>
-                        </h3>
-                        <div className="content_btn">
-                          <a href="#">Order Now</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                    );
+                  })}
+                  
               </div>
             </div>
           </div>

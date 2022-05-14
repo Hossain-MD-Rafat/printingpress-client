@@ -948,7 +948,7 @@ p {
   -o-border-radius: 50%;
 }
 .hire .hire_wrapper .card_item .content_text {
-  padding: 50px 35px 35px 35px;
+  padding: 10px 20px 30px;
   -webkit-box-shadow: 1px 1.732px 20px 0px rgba(0, 0, 0, 0.1);
   box-shadow: 1px 1.732px 20px 0px rgba(0, 0, 0, 0.1);
   border-bottom-left-radius: 8px;
