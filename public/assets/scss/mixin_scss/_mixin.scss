@@ -1,0 +1,24 @@
+@mixin button {
+    padding: 17px 45px;
+    font-size: 16px;
+    font-weight: 700;
+    width: 0;
+    color: $white;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+     background-color: $blue;
+    overflow: hidden;
+    position: relative;
+    &:hover{
+        background-color: $black;
+        transition: all linear .3s;
+        -webkit-transition: all linear .3s;
+        -moz-transition: all linear .3s;
+        -ms-transition: all linear .3s;
+        -o-transition: all linear .3s;
+}
+  
+}

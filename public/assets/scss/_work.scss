@@ -1,0 +1,101 @@
+.work{
+    background-image: url(../images/work_bg.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover ;
+    background-attachment: fixed;
+    padding: 120px 0 450px 0;
+    position: relative;
+    z-index: 1;
+    &::before{
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0,0,0,0.5);
+        z-index: -1;
+    }
+    .section_header{   
+        h2{
+            font-size: 48px;
+            font-weight: 600;
+            color: $white;
+            padding-bottom: 30px;
+            
+        }
+        p{
+            font-size: 16px;
+            font-weight: 400;
+            font-family: $robot;
+            color: $white;
+            line-height: 24px;
+            padding: 0 280px;
+        }
+    }
+
+    .work_wrapper{
+      .play_button{
+          a{
+              i{
+                  font-size: 40px;
+                  color: $white;
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%,-50%);
+                  -webkit-transform: translate(-50%,-50%);
+                  -moz-transform: translate(-50%,-50%);
+                  -ms-transform: translate(-50%,-50%);
+                  -o-transform: translate(-50%,-50%);
+
+                  &::before{
+                      padding: 30px 34px;
+                      border: 1px solid $white;
+                      border-radius: 50%;
+                      -webkit-border-radius: 50%;
+                      -moz-border-radius: 50%;
+                      -ms-border-radius: 50%;
+                      -o-border-radius: 50%;
+}
+                  
+}
+          }
+      }
+    }
+}
+
+.work_card{
+     position: relative;
+     top: -175px;
+     z-index: 9999;
+      .work_wrap{
+          padding: 40px 30px 25px 30px;
+          box-shadow: 1px 1.732px 20px 0px rgba(0,0,0,0.2);
+          background-color: $white;
+          margin-right: 10px;
+          border-radius: 8px;
+          -webkit-border-radius: 8px;
+          -moz-border-radius: 8px;
+          -ms-border-radius: 8px;
+          -o-border-radius: 8px;
+          &:hover{
+            box-shadow: 1px 1.732px 20px 0px rgba(0,0,0,0.3);
+          }
+        h4{
+            font-size: 20px;
+            font-weight: 600;
+            color: $black;
+            padding: 35px 0 15px 0;
+          }
+          p{
+            font-size: 16px;
+            font-weight: 400;
+            font-family: $robot;
+            color: $text;
+            line-height: 24px;
+        }
+      }
+}
+

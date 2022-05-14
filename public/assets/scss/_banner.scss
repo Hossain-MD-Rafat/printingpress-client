@@ -1,0 +1,35 @@
+.banner{
+    background-color: $banner_bg;
+    padding: 30px 0;
+    .banner_wrapper{
+        .banner_item{
+            h2{
+                font-size: 66px;
+                font-weight: 700;
+                color: $black;
+                line-height: 92px;
+            }
+            p{
+                font-size: 18px;
+                font-weight: 400;
+                font-family: $robot;
+                color: #3f4040;
+                line-height: 24px;
+                padding: 28px 0 37px 0;
+            }
+            .banner_btn{
+                
+                a{
+                    @include button;
+                    margin-right: 25px;
+                    text-transform: uppercase;
+                }
+            }
+        }
+        .banner_content{
+            img{
+                width: 100%;
+            }
+        }
+    }
+}

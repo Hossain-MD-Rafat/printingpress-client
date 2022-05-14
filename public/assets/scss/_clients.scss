@@ -1,0 +1,125 @@
+.clients{
+    padding-bottom: 120px;
+    position: relative;
+    .section_header{   
+        h2{
+            font-size: 48px;
+            font-weight: 600;
+            color: $black;
+            padding-bottom: 30px;
+            span{
+                color: $blue;
+            }
+        }
+        p{
+            font-size: 16px;
+            font-weight: 400;
+            font-family: $robot;
+            color: #3f4040;
+            line-height: 24px;
+            padding: 0 280px;
+        }
+    }
+
+    .client_wrapper{
+        padding-top: 75px;
+        position: relative;
+        .prev2{
+            height: 40px;
+            width: 40px;
+            text-align: center;
+            line-height: 40px;
+            background-color: $blue;
+            color: $white;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: -5%;
+            transform: translateY(-50%);
+            z-index: 99;
+            cursor: pointer;
+            &:hover{
+                background-color: $black;
+            }
+          }
+          .next2{
+            height: 40px;
+            width: 40px;
+            text-align: center;
+            line-height: 40px;
+            background-color: $blue;
+            color: $white;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            right: -5%;
+            z-index: 99;
+            cursor: pointer;
+         &:hover{
+                background-color: $black;
+            }
+          }
+        .client_wrap{
+            padding: 40px 40px;
+            border: 1px solid #deeeff;
+            margin: 0 15px;
+            p{
+                font-size: 16px;
+                font-weight: 400;
+                font-family: $robot;
+                color: $text;
+                line-height: 24px;
+                padding: 20px 0 10px 0;
+            }
+            .client_profile{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding-top: 20px;
+                .client_item{
+                    display: flex;
+                    align-items: center;
+                    .client_img{
+                        img{
+                            border-radius: 50%;
+                            -webkit-border-radius: 50%;
+                            -moz-border-radius: 50%;
+                            -ms-border-radius: 50%;
+                            -o-border-radius: 50%;
+                          }   
+                    }
+
+                    .detail{
+                        padding-left: 20px;
+                        h5{
+                            font-size: 18px;
+                            font-weight: 600;
+                            color: $black;
+                        }
+                        h6{
+                            font-size: 16px;
+                            font-weight: 400;
+                            color: $text;
+                            font-family: $robot;
+                        }
+                    }
+                }
+
+                ul{
+                    li{
+                        display: inline-block;
+                        color: $yellow;
+                    }
+                }
+            }
+        }
+    }
+}
