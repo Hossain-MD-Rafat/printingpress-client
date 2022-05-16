@@ -2,7 +2,7 @@ import React from "react";
 
 export default function () {
   return (
-    <React.Fragment>
+    <div>
       <header>
         <div className="header_top">
           <div className="container">
@@ -46,7 +46,7 @@ export default function () {
         </div>
         <div className="header">
           <div className="container">
-            <div className="row">
+            <div className="row align-items-center">
               <div className="col-lg-8">
                 <div className="header_left">
                   <div className="logo w-30">
@@ -165,6 +165,6 @@ export default function () {
           </div>
         </div>
       </nav>
-    </React.Fragment>
+    </div>
   );
 }

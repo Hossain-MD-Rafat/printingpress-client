@@ -1778,13 +1778,14 @@ p {
   font-weight: 600;
   text-decoration: line-through;
 }
-.sell-price {
-  font-size: 20px;
-  font-weight: 600;
-}
 .w-30{
   width: 30% !important;
 }
 .w-60{
   width: 60% !important;
+}
+.pd-price{
+  font-weight: 600;
+  font-size: 20px;
+  margin-left: 25px;
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Footer from "./includes/Footer";
 import Header from "./includes/Header";
 
@@ -16,7 +17,7 @@ export default function Home() {
   }, []);
 
   return (
-    <React.Fragment>
+    <div>
       <Header />
       <section>
         <div
@@ -154,6 +155,7 @@ export default function Home() {
               <div className="row">
                 {data.product_categories &&
                   data.product_categories.map((category, key) => {
+                    let toCategory = (id) => {};
                     return (
                       <div className="col-sm-6 col-md-4 col-lg-3" key={key}>
                         <div className="populer_wrap">
@@ -161,12 +163,16 @@ export default function Home() {
                             <img src="assets/images/popular1.png" alt="" />
                           </div>
                           <div className="wrap_title">
-                            <a href="#">
+                            <Link
+                              to={{
+                                pathname: `category/${category.microsite_id}/${category.id}`,
+                              }}
+                            >
                               {category.name}
                               <span>
                                 <i className="fa-solid fa-right-long"></i>
                               </span>
-                            </a>
+                            </Link>
                           </div>
                         </div>
                       </div>
@@ -239,23 +245,50 @@ export default function Home() {
               <div className="row card_slider">
                 {data.featured_products &&
                   data.featured_products.map((pd) => {
+                    let sell_price = -1;
+                    if (pd.discount_type == 1) {
+                      sell_price = pd.price - pd.discount;
+                      if (sell_price < 0) sell_price = 0;
+                    }
+                    if (pd.discount_type == 2) {
+                      sell_price = pd.price - (pd.price * pd.discount) / 100;
+                      if (sell_price < 0) sell_price = 0;
+                    }
+                    const images = pd.images.split(";");
                     return (
                       <div className="col-lg-4">
                         <div className="card_item">
                           <div className="content_img">
-                            <img src="assets/images/hireone.png" alt="" />
-                            <img src="assets/images/hireone.png" alt="" />
-                            <img src="assets/images/hireone.png" alt="" />
-                            <img src="assets/images/hireone.png" alt="" />
+                            {images.map((image) => {
+                              return (
+                                <img
+                                  src={`https://icircles.app/uploads/rfq/${pd.microsite_id}/${image}`}
+                                  alt=""
+                                />
+                              );
+                            })}
                           </div>
-                          
+
                           <div className="content_text">
                             <div className="title">
                               <span>{pd.name}</span>
                             </div>
                             <div className="content_footer">
                               <div className="content_btn">
-                                Starting From <span>$25</span>
+                                <span
+                                  className={
+                                    sell_price > -1
+                                      ? "line-through pd-price"
+                                      : "pd-price"
+                                  }
+                                >
+                                  ${pd.price}
+                                </span>
+                                {sell_price > -1 && (
+                                  <span className="pd-price">
+                                    ${sell_price}
+                                  </span>
+                                )}
                               </div>
                             </div>
                           </div>
@@ -265,23 +298,50 @@ export default function Home() {
                   })}
                 {data.popular_products &&
                   data.popular_products.map((pd) => {
+                    let sell_price = -1;
+                    if (pd.discount_type == 1) {
+                      sell_price = pd.price - pd.discount;
+                      if (sell_price < 0) sell_price = 0;
+                    }
+                    if (pd.discount_type == 2) {
+                      sell_price = pd.price - (pd.price * pd.discount) / 100;
+                      if (sell_price < 0) sell_price = 0;
+                    }
+                    const images = pd.images.split(";");
                     return (
                       <div className="col-lg-4">
                         <div className="card_item">
                           <div className="content_img">
-                            <img src="assets/images/hireone.png" alt="" />
-                            <img src="assets/images/hireone.png" alt="" />
-                            <img src="assets/images/hireone.png" alt="" />
-                            <img src="assets/images/hireone.png" alt="" />
+                            {images.map((image) => {
+                              return (
+                                <img
+                                  src={`https://icircles.app/uploads/rfq/${pd.microsite_id}/${image}`}
+                                  alt=""
+                                />
+                              );
+                            })}
                           </div>
-                          
+
                           <div className="content_text">
                             <div className="title">
                               <span>{pd.name}</span>
                             </div>
                             <div className="content_footer">
                               <div className="content_btn">
-                                Starting From <span>$25</span>
+                                <span
+                                  className={
+                                    sell_price > -1
+                                      ? "line-through pd-price"
+                                      : "pd-price"
+                                  }
+                                >
+                                  ${pd.price}
+                                </span>
+                                {sell_price > -1 && (
+                                  <span className="pd-price">
+                                    ${sell_price}
+                                  </span>
+                                )}
                               </div>
                             </div>
                           </div>
@@ -291,23 +351,50 @@ export default function Home() {
                   })}
                 {data.bestselling_products &&
                   data.bestselling_products.map((pd) => {
+                    let sell_price = -1;
+                    if (pd.discount_type == 1) {
+                      sell_price = pd.price - pd.discount;
+                      if (sell_price < 0) sell_price = 0;
+                    }
+                    if (pd.discount_type == 2) {
+                      sell_price = pd.price - (pd.price * pd.discount) / 100;
+                      if (sell_price < 0) sell_price = 0;
+                    }
+                    const images = pd.images.split(";");
                     return (
                       <div className="col-lg-4">
                         <div className="card_item">
                           <div className="content_img">
-                            <img src="assets/images/hireone.png" alt="" />
-                            <img src="assets/images/hireone.png" alt="" />
-                            <img src="assets/images/hireone.png" alt="" />
-                            <img src="assets/images/hireone.png" alt="" />
+                            {images.map((image) => {
+                              return (
+                                <img
+                                  src={`https://icircles.app/uploads/rfq/${pd.microsite_id}/${image}`}
+                                  alt=""
+                                />
+                              );
+                            })}
                           </div>
-                          
+
                           <div className="content_text">
                             <div className="title">
                               <span>{pd.name}</span>
                             </div>
                             <div className="content_footer">
                               <div className="content_btn">
-                                Starting From <span>$25</span>
+                                <span
+                                  className={
+                                    sell_price > -1
+                                      ? "line-through pd-price"
+                                      : "pd-price"
+                                  }
+                                >
+                                  ${pd.price}
+                                </span>
+                                {sell_price > -1 && (
+                                  <span className="pd-price">
+                                    ${sell_price}
+                                  </span>
+                                )}
                               </div>
                             </div>
                           </div>
@@ -315,7 +402,6 @@ export default function Home() {
                       </div>
                     );
                   })}
-                  
               </div>
             </div>
           </div>
@@ -539,6 +625,6 @@ export default function Home() {
         </div>
       </section>
       <Footer />
-    </React.Fragment>
+    </div>
   );
 }

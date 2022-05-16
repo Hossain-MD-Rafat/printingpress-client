@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <React.Fragment>
+    <div>
       <section>
         <div className="footer">
           <div className="container">
@@ -193,6 +193,6 @@ export default function Footer() {
           <div className="offcanvas-body"></div>
         </div>
       </section>
-    </React.Fragment>
+    </div>
   );
 }
